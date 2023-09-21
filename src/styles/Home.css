@@ -16,6 +16,12 @@
     color: white;
     
 }
+.log{
+    margin-right: 30px;
+    background-color: brown;
+    border: none;
+    border-radius: 3px;
+}
 .SearchBar{
     display: flex;
     justify-content: end;

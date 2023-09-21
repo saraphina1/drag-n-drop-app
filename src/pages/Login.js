@@ -3,7 +3,7 @@ import "../styles/Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import { auth } from "../firebaseConfig";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function Login() {
@@ -51,7 +51,7 @@ return (
           <button className="btn btn-success w-100 mt-2">LOG IN</button>
         </form>
         <div>
-        <p>Don't have an account? Sign up 
+        <p>Don't have an account? <Link to="/signup">Sign up </Link>
         </p></div>
       </div>
     </div>

@@ -1,8 +1,7 @@
 import "../styles/Home.css";
 import React, { useState ,useEffect} from "react";
 import { FadeLoader } from "react-spinners";
-
-// import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -28,22 +27,7 @@ const SortableUser = ({ item }) => {
       {...listeners}
       key={item.id}
       className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
-      {/* <Card
-        sx={{
-          maxWidth: 345,
-          marginTop: 2,
-          marginBottom: 2,
-          cursor: "-webkit-grab",
-        }}
-      >
-        <CardMedia component="img" height="200" image={item.image} alt="im" />
-        <CardContent>
-          <Typography gutterBottom variant="h6" component="div">
-            {item.tag}
-          </Typography>
-        </CardContent>
-      </Card> */}
-<div className="card p-0 overflow-hidden h-100 shadow m-2">
+      <div className="card p-0 overflow-hidden h-100 shadow m-2">
 <img src={item.image} className="card-img-top" alt="img"/>
 <div className="card-body">
 <h5 className="card-title">{item.tag}</h5>
@@ -159,7 +143,11 @@ function Home() {
           value={filter}
           onChange={SearchItem.bind(this)}
         />
+        
         </div>
+        <Link to="/login">
+        <button className="log">Log in</button>
+        </Link>
       </div>
       </div>
 
