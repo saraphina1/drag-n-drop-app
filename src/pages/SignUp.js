@@ -66,6 +66,7 @@ function SignUp() {
               </button>
             </Link>
           </form>
+          <p>Proceed to the <Link to="/login">Log in</Link> page</p>
         </div>
       
     </div>
