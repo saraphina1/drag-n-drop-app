@@ -1,7 +1,8 @@
 import "../styles/Home.css";
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
+import { FadeLoader } from "react-spinners";
 
-import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+// import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -26,8 +27,8 @@ const SortableUser = ({ item }) => {
       {...attributes}
       {...listeners}
       key={item.id}
-    >
-      <Card
+      className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
+      {/* <Card
         sx={{
           maxWidth: 345,
           marginTop: 2,
@@ -41,13 +42,23 @@ const SortableUser = ({ item }) => {
             {item.tag}
           </Typography>
         </CardContent>
-      </Card>
+      </Card> */}
+<div className="card p-0 overflow-hidden h-100 shadow m-2">
+<img src={item.image} className="card-img-top" alt="img"/>
+<div className="card-body">
+<h5 className="card-title">{item.tag}</h5>
+</div>
+</div>
+
+
+
     </div>
   );
 };
 
 function Home() {
   const [filter, setFilter] = useState("");
+  const [loading, setLoading] = useState(false);
   const [Items, setItems] = useState([
     {
       id: 1,
@@ -124,20 +135,38 @@ function Home() {
         .includes(filter.toString().toLowerCase())
     );
   });
+
+  //for the loader
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <div>
-      <h2 className="img">Image Gallery</h2>
-      <div className="SearchBar">
-        <h5>Search</h5>
+      
+      <div className="nav">
+      
+      <h2 className="imgG mt-3">Image Gallery</h2>
+      <div className="SearchBar col-12 mb-5">
+        <div className="mb-3 mt-3 col-4 mx-auto search">
+        <h5 className="searchText">Search</h5>
         <input
           type="text"
-          className="search"
+          className="search w-100"
           value={filter}
           onChange={SearchItem.bind(this)}
         />
+        </div>
+      </div>
       </div>
 
       <div className="cardWrapper">
+      {loading ? (
+        <FadeLoader color={"#D0021B"} loading={loading} size={150} />
+      ) : (
         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
           <SortableContext items={Items} strategy={verticalListSortingStrategy}>
             {dataSearch.map((item) => (
@@ -145,8 +174,12 @@ function Home() {
             ))}
           </SortableContext>
         </DndContext>
+      )}
       </div>
+      
+      
     </div>
+    
   );
 }
 
