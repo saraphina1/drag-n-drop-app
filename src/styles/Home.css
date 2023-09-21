@@ -1,0 +1,16 @@
+
+.cardWrapper{
+    flex-direction: row;
+    display: flex;
+    margin-left: 30px;
+    margin-right: 30px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.img{
+    text-align: center;
+}
+.SearchBar{
+    display: flex;
+    justify-content: end;
+}

@@ -1,79 +1,135 @@
-// import React,{useState} from 'react';
-// import { DndContext,closestCenter } from '@dnd-kit/core';
-// import { arrayMove,SortableContext, verticalListSortingStrategy} from '@dnd-kit/sortable';
-// import { SortableFile } from '../components/SortableFile';
-
-// function Home() {
-// const [ImageList, setImageList]=useState([
-//   {
-//     id: 1,
-//     url: "https://tse1.mm.bing.net/th?id=OIP.92wIxwnq8FIO9oOg0KaF-QHaEo&pid=Api&P=0&h=220"
-//   },
-//   {
-//     id: 2,
-//     url: "https://tse3.mm.bing.net/th?id=OIP.Y6yexcPPN9jw4MnvOBQcxgHaEo&pid=Api&P=0&h=220"
-//   },
-//   {
-//     id: 3,
-//     url: "https://tse2.mm.bing.net/th?id=OIP.8SLe-6w0Q0yxvgbQi5eGcwHaFj&pid=Api&P=0&h=220"
-//   },
-//   {
-//     id: 4,
-//     url: "https://tse4.mm.bing.net/th?id=OIP.Z6FKeDZdq2_liTU7AvTi8wHaFj&pid=Api&P=0&h=220"
-//   },
-//   {
-//     id: 5,
-//     url: "https://tse3.mm.bing.net/th?id=OIP.zDU7SlDI0vRiI7PhKE4JKgHaFj&pid=Api&P=0&h=220"
-//   },
-//   {
-//     id: 6,
-//     url: "https://tse2.mm.bing.net/th?id=OIP.xcYKkSST5F1QcuWvspJYQQHaEo&pid=Api&P=0&h=220"
-//   },
-// ])
-
-//   return (
-//     <DndContext
-//     collisionDetection={closestCenter}
-//     onDragEnd={handleDragEnd}
-//     >
-      
-
-
-// <div className="container p-3" style={{"width":"80%"}} align="center">
-// <h3>Image Gallery</h3>
-// <SortableContext 
-// items={ImageList}
-// strategy={verticalListSortingStrategy}
-// >
-//   <div>
-//     {/* {ImageList.map(Image=> <SortableFile key={Image} id={Image}/>)} */}
-//     {ImageList.map(({id, url})=>(
-//       <SortableFile key={id}  id={url}/>
-    
-//     ))}
-//      {ImageList.id} 
-//   </div>
-
-
-// </SortableContext>
-// </div>
+import "../styles/Home.css"
+import React ,{useState} from 'react'
 
 
 
-//     </DndContext>
-    
-//   );
-//   function handleDragEnd(event){
-//      console.log('Drag end called')
-//   }
-// }
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Box,
+} from "@mui/material";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import {CSS} from "@dnd-kit/utilities"
 
-// export default Home
-import React from 'react'
+const SortableUser=({item})=>{
+
+  const {attributes, listeners, setNodeRef, transform, transition}= useSortable({id:item.id})
+
+  const style={
+     transition,
+     transform: CSS.Transform.toString(transform)
+  }
+return(
+  <div ref={setNodeRef} style={style}{...attributes} {...listeners}>
+  <Card   
+        sx={{ maxWidth: 345 ,marginTop:2,marginBottom:2, cursor: "-webkit-grab"}}
+        
+               >
+                 <CardMedia
+                   component="img"
+                  height="200"
+                  image={item.image}
+                  alt="im"
+                 />
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                     {item.tag}
+                   </Typography>
+                  
+                </CardContent>
+              </Card>
+        </div>        
+)
+}
 
 function Home() {
+  // const[query,setQuery]=useState("")
+  // const getFilteredItems=(query,Items)=>{
+  //   if (!query){
+  //     return Items;
+  //   }
+  //   return  Items.filter(song=> song.tag.includes(query))
+    
+  // }
+  
+    const [Items, setItems] = useState([
+      {
+        "id":1,
+        "tag":"first picture",
+        "image":"https://tse4.mm.bing.net/th?id=OIP.YxstgBqqSQbRO14THxWXEAHaEo&pid=Api&P=0&h=220",
+      },
+      {
+        "id":2,
+        "tag":"second picture",
+        "image":"https://tse4.mm.bing.net/th?id=OIP.uvLp3WBj-fSfmeKyyxvsdwHaEo&pid=Api&P=0&h=220",
+      },
+      
+    {
+      "id":3,
+      "tag":"third picture",
+      "image":"https://tse1.mm.bing.net/th?id=OIP.q1STB3YqkMvCON6QQVAoegHaF7&pid=Api&P=0&h=220",
+    },
+    {
+      "id":4,
+      "tag":"fourth picture",
+      "image":"https://tse3.mm.bing.net/th?id=OIP.FPmbUcb50Uw2irlK5PYmZAHaF7&pid=Api&P=0&h=220",
+    },
+    {
+      "id":5,
+      "tag":"fifth picture",
+      "image":"https://tse2.mm.bing.net/th?id=OIP.xcYKkSST5F1QcuWvspJYQQHaEo&pid=Api&P=0&h=220",
+    },
+    {
+      "id":6,
+      "tag":"sixth picture",
+      "image":"https://tse3.mm.bing.net/th?id=OIP.qirmcuwmkP0rvWABdDiPmQHaEo&pid=Api&P=0&h=220",
+    },
+    {
+      "id":7,
+      "tag":"seventh picture",
+      "image":"https://tse2.mm.bing.net/th?id=OIP.dP-ErzyyOC4o5w5cmPb05AHaFj&pid=Api&P=0&h=220",
+    },
+    {
+      "id":8,
+      "tag":"eigth picture",
+      "image":"https://tse1.mm.bing.net/th?id=OIP.38_l025VfdpPryTEs5uV0gHaFj&pid=Api&P=0&h=220",
+    },
+    ]);
+  // const filteredItems= getFilteredItems(query,Items)
+     
+    const onDragEnd=(event)=>{
+      const {active, over}=event;
+      if(active.id===over.id){
+        return;
+      }
+      setItems(Items=>{
+        const oldIndex= Items.findIndex((item)=>item.id===active.id);
+        const newIndex= Items.findIndex((item)=>item.id===over.id);
+        return arrayMove(Items, oldIndex, newIndex)
+      })
+    }
   return (
-    <div>Home</div>
+    <div>
+      <h2 className="img">Image Gallery</h2>
+      <div className="SearchBar"><h5>Search</h5><input type="text" className="search" /></div>
+      {/* <ul>
+        {filteredItems.map(item=> <Card key={item.id} />)}
+      </ul> */}
+      <div className="cardWrapper">
+        <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+          <SortableContext items={Items} strategy={verticalListSortingStrategy}>
+      {Items.map((item)=>(
+        
+      
+        <SortableUser key={item.id} item={item}/>
+      ))}
+      </SortableContext>
+      </DndContext>
+      </div>
+      </div>
   )
 }
 
