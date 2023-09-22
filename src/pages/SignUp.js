@@ -23,7 +23,7 @@ function SignUp() {
         Navigate('/login')
       })
       .catch((error) => {
-        console.log(error);
+        alert(error.message);
       });
   };
 

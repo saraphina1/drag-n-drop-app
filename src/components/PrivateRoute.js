@@ -1,8 +1,10 @@
-import React from 'react'
+import { Outlet, Navigate } from 'react-router-dom'
 
-function PrivateRoute({children}) {
+const PrivateRoute=()=> {
+    
+    let isAuthenticated= localStorage.getItem("isLogged")
   return (
-    <div>PrivateRoute</div>
+    isAuthenticated === true ? <Navigate to="/login"/> :<Outlet/>
   )
 }
 

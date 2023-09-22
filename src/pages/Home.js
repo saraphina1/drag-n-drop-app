@@ -1,7 +1,7 @@
 import "../styles/Home.css";
 import React, { useState ,useEffect} from "react";
 import { FadeLoader } from "react-spinners";
-import { Link } from "react-router-dom";
+
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -20,8 +20,13 @@ const SortableUser = ({ item }) => {
     transition,
     transform: CSS.Transform.toString(transform),
   };
+  function handleClick(){
+    localStorage.setItem("isLogged" , true)
+    window.location.href="/"
+  }
   return (
     <div
+    onClick={()=>handleClick()}
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -151,9 +156,7 @@ function Home() {
         />
         
         </div>
-        <Link to="/login">
-        <button className="log">Log in</button>
-        </Link>
+        
       </div>
       </div>
 

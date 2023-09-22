@@ -21,7 +21,7 @@ signInWithEmailAndPassword(auth, email, password)
     Navigate("/")
 }).catch((error)=>{
     console.log(error)
-    alert('user not found')
+    alert(error.message)
 })
 }
 
