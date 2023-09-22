@@ -11,6 +11,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+
 const SortableUser = ({ item }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: item.id });
@@ -43,6 +44,8 @@ const SortableUser = ({ item }) => {
 function Home() {
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(false);
+  
+
   const [Items, setItems] = useState([
     {
       id: 1,
@@ -122,10 +125,13 @@ function Home() {
 
   //for the loader
   useEffect(() => {
+    
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      
     }, 2000);
+    
   }, []);
 
   return (

@@ -3,12 +3,13 @@ import "../styles/Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const Navigate= useNavigate();
    
     
   
@@ -18,6 +19,8 @@ function SignUp() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log(userCredential);
+        alert('Account Created' )
+        Navigate('/login')
       })
       .catch((error) => {
         console.log(error);
@@ -61,10 +64,10 @@ function SignUp() {
 
               <div className="invalid-feedback">Please Enter your password</div>
             </div>
-            <Link to="/login">
+            {/* <Link to="/login"> */}
               <button className="btn btn-success w-100 mt-2">SIGN UP
               </button>
-            </Link>
+            {/* </Link> */}
           </form>
           <p>Proceed to the <Link to="/login">Log in</Link> page</p>
         </div>
