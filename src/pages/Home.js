@@ -1,7 +1,7 @@
 import "../styles/Home.css";
 import React, { useState ,useEffect} from "react";
 import { FadeLoader } from "react-spinners";
-
+import { Link } from "react-router-dom";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
@@ -156,7 +156,9 @@ function Home() {
         />
         
         </div>
-        
+        <Link to="/login">
+        <button className="log">Log in</button>
+        </Link>
       </div>
       </div>
 
