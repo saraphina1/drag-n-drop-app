@@ -1,31 +1,43 @@
 import React, { useState} from "react";
 import "../styles/Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "../firebaseConfig";
 import { Link , useNavigate} from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const Navigate= useNavigate();
+  const {handleSignUp}=useAuth();
    
     
   
 
-  const Signup = (e) => {
+  const Signup = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-        alert('Account Created' )
-        Navigate('/login')
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     console.log(userCredential);
+    //     alert('Account Created' )
+    //     Navigate('/login')
+    //   })
+    //   .catch((error) => {
+    //     alert(error.message);
+    //   });
+    if (email==="" && password===""){
+      alert("please enter a valid email address");
+      return;
+    }
+    await handleSignUp(email, password);
+    setEmail('');
+    setPassword('');
+    Navigate('/');
+    alert("successfully signed in")
   };
+
 
 
   return (
@@ -64,10 +76,10 @@ function SignUp() {
 
               <div className="invalid-feedback">Please Enter your password</div>
             </div>
-            {/* <Link to="/login"> */}
+             <Link to="/login"> 
               <button className="btn btn-success w-100 mt-2">SIGN UP
               </button>
-            {/* </Link> */}
+             </Link> 
           </form>
           <p>Proceed to the <Link to="/login">Log in</Link> page</p>
         </div>

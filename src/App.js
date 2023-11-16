@@ -1,31 +1,52 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import PrivateRoute from './components/PrivateRoute';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import './App.css'; 
+import { useEffect } from 'react';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
-// import AuthDetails from './components/AuthDetails';
+ import useAuth from './hooks/useAuth';
+
+import { SortableUser } from './components/SortableUser';
+
+ 
+
+
 
 function App() {
+
+   const Navigate=useNavigate;
+    const {user}=useAuth()
+
+     useEffect(()=>{
+       if (user){
+         Navigate('/')
+     } else{
+        Navigate("/login")
+      }
+    
+     },[user]);
+
+
   return (
+    
     
     <div className="App">
       
       <Router>
       <Routes>
-        <Route element={<PrivateRoute/>}>
-        <Route path="/" exact element={<Home/>}/>  
-        </Route>
         
+        
+        <Route path='/' element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         </Routes>
       </Router>
       
-      {/* <AuthDetails/> */}
+      
      </div>
      
   );
+  
 }
 
 
