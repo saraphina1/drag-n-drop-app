@@ -1,55 +1,67 @@
 import "../styles/Home.css";
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FadeLoader } from "react-spinners";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
-  useSortable,
+  
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { SortableUser } from "../components/SortableUser";
+
+// import { onAuthStateChanged } from "firebase/auth";
+// import { auth } from "../firebaseConfig";
 
 
-const SortableUser = ({ item }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: item.id });
-
-  const style = {
-    transition,
-    transform: CSS.Transform.toString(transform),
-  };
-  function handleClick(){
-    localStorage.setItem("isLogged" , true)
-    window.location.href="/"
-  }
-  return (
-    <div
-    onClick={()=>handleClick()}
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      key={item.id}
-      className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
-      <div className="card p-0 overflow-hidden h-100 shadow m-2">
-<img src={item.image} className="card-img-top" alt="img"/>
-<div className="card-body">
-<h5 className="card-title">{item.tag}</h5>
-</div>
-</div>
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     // User is signed in, see docs for a list of available properties
+//     // https://firebase.google.com/docs/reference/js/auth.user
+//     console.log("this is the home page")
+//     // ...
+//   } else {
+//     // User is signed out
+//     // ...
+//     Navigate("/login")
+//   }
+// });
 
 
+// const SortableUser = ({ item }) => {
+//   const { attributes, listeners, setNodeRef, transform, transition } =
+//     useSortable({ id: item.id });
 
-    </div>
-  );
-};
+//   const style = {
+//     transition,
+//     transform: CSS.Transform.toString(transform),
+//   };
+  
+
+//   return (
+//     <div
+      
+//       ref={setNodeRef}
+//       style={style}
+//       {...attributes}
+//       {...listeners}
+//       key={item.id}
+//       className="col-11 col-md-6 col-lg-3 mx-0 mb-4"
+//     >
+//       <div className="card p-0 overflow-hidden h-100 shadow m-2">
+//         <img src={item.image} className="card-img-top" alt="img" />
+//         <div className="card-body">
+//           <h5 className="card-title">{item.tag}</h5>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
 function Home() {
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(false);
-  
 
   const [Items, setItems] = useState([
     {
@@ -102,6 +114,7 @@ function Home() {
         "https://tse1.mm.bing.net/th?id=OIP.38_l025VfdpPryTEs5uV0gHaFj&pid=Api&P=0&h=220",
     },
   ]);
+   
 
   const onDragEnd = (event) => {
     const { active, over } = event;
@@ -127,58 +140,55 @@ function Home() {
         .includes(filter.toString().toLowerCase())
     );
   });
+  
 
   //for the loader
-  useEffect(() => {
-    
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      
-    }, 2000);
-    
-  }, []);
+   useEffect(() => {
+ const timer=setTimeout(()=>{
+  setLoading(false);
+},3000);
+
+ return()=>clearTimeout(timer);
+
+    }, []);
 
   return (
     <div>
-      
       <div className="nav">
-      
-      <h2 className="imgG mt-3">Image Gallery</h2>
-      <div className="SearchBar col-12 mb-5">
-        <div className="mb-3 mt-3 col-4 mx-auto search">
-        <h5 className="searchText">Search</h5>
-        <input
-          type="text"
-          className="search w-100"
-          value={filter}
-          onChange={SearchItem.bind(this)}
-        />
-        
+        <h2 className="imgG mt-3">Image Gallery</h2>
+        <div className="SearchBar col-12 mb-5">
+          <div className="mb-3 mt-3 col-4 mx-auto search">
+            <h5 className="searchText">Search</h5>
+            <input
+              type="text"
+              className="search w-100"
+              value={filter}
+              onChange={SearchItem.bind(this)}
+            />
+          </div>
+          <Link to="/login">
+            <button className="log">Log in</button>
+          </Link>
         </div>
-        <Link to="/login">
-        <button className="log">Log in</button>
-        </Link>
-      </div>
       </div>
 
       <div className="cardWrapper">
-      {loading ? (
-        <FadeLoader color={"#D0021B"} loading={loading} size={150} />
-      ) : (
-        <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
-          <SortableContext items={Items} strategy={verticalListSortingStrategy}>
-            {dataSearch.map((item) => (
-              <SortableUser key={item.id} item={item} />
-            ))}
-          </SortableContext>
-        </DndContext>
-      )}
+        {loading ? (
+          <FadeLoader color={"#D0021B"} loading={loading} size={150} />
+        ) : (
+          <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+            <SortableContext
+              items={Items}
+              strategy={verticalListSortingStrategy}
+            >
+              {dataSearch.map((item) => (
+                <SortableUser key={item.id} item={item} />
+              ))}
+            </SortableContext>
+          </DndContext>
+        )}
       </div>
-      
-      
     </div>
-    
   );
 }
 
