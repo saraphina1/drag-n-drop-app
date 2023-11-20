@@ -9,6 +9,8 @@ import {
   arrayMove,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import { SortableUser } from "../components/SortableUser";
+
 
 
 function Home() {
