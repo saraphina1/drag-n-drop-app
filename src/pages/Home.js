@@ -1,17 +1,51 @@
 import "../styles/Home.css";
 import React, { useState, useEffect } from "react";
 import { FadeLoader } from "react-spinners";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableUser } from "../components/SortableUser";
 import {
   SortableContext,
   arrayMove,
+  useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { SortableUser } from "../components/SortableUser";
+import { CSS } from "@dnd-kit/utilities";
 
 
+const SortableUser = ({ item }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: item.id });
+
+  const style = {
+    transition,
+    transform: CSS.Transform.toString(transform),
+  };
+  function handleClick(){
+    localStorage.setItem("isLogged" , true)
+    window.location.href="/"
+  }
+  return (
+    <div
+    onClick={()=>handleClick()}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      key={item.id}
+      className="col-11 col-md-6 col-lg-3 mx-0 mb-4">
+      <div className="card p-0 overflow-hidden h-100 shadow m-2">
+<img src={item.image} className="card-img-top" alt="img"/>
+<div className="card-body">
+<h5 className="card-title">{item.tag}</h5>
+</div>
+</div>
+
+
+
+    </div>
+  );
+};
 
 function Home() {
   const [filter, setFilter] = useState("");
@@ -68,6 +102,7 @@ function Home() {
         "https://tse1.mm.bing.net/th?id=OIP.38_l025VfdpPryTEs5uV0gHaFj&pid=Api&P=0&h=220",
     },
   ]);
+   
 
   const onDragEnd = (event) => {
     const { active, over } = event;
@@ -93,39 +128,40 @@ function Home() {
         .includes(filter.toString().toLowerCase())
     );
   });
+  
 
   //for the loader
   useEffect(() => {
+    
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      
     }, 2000);
+    
   }, []);
 
   return (
-    <section>
+    <div>
+      
       <div className="nav">
-        <h2 className="imgG mt-3">Image Gallery</h2>
-        <div className="ss"> 
-          <span className="search">
-            
-            <input
-              type="text"
-              className="search w-100"
-              placeholder="Search by Picture's name"
-              value={filter}
-              onChange={SearchItem.bind(this)}
-            />
-           
-          </span>
-          
-          <span className='log'> 
-          <Link to="/login">
-            <button className="login">Log in</button>
-          </Link> 
-          </span> 
-          </div>
+      
+      <h2 className="imgG mt-3">Image Gallery</h2>
+      <div className="SearchBar col-12 mb-5">
+        <div className="mb-3 mt-3 col-4 mx-auto search">
+        <h5 className="searchText">Search</h5>
+        <input
+          type="text"
+          className="search w-100"
+          value={filter}
+          onChange={SearchItem.bind(this)}
+        />
         
+        </div>
+        <Link to="/login">
+        <button className="log">Log in</button>
+        </Link>
+      </div>
       </div>
 
       <div className="cardWrapper">
@@ -144,7 +180,10 @@ function Home() {
           </DndContext>
         )}
       </div>
-    </section>
+      
+      
+    </div>
+    
   );
 }
 

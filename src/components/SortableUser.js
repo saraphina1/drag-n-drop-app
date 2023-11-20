@@ -31,6 +31,6 @@ export const SortableUser = ({ item}) => {
           </div>
         </div>
       </div>
-    )
-}
+    );
+};
 
