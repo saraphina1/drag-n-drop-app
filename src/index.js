@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 // import { AuthContextProvider } from './components/ContextFile';
 
 import App from './App';
-import { AuthContextProvider } from './components/ContextFile';
+
 
 
 
@@ -13,9 +13,8 @@ root.render(
   <React.StrictMode>
   
   
-    <AuthContextProvider>
     <App />
-    </AuthContextProvider>
+    
   </React.StrictMode>
   
   

@@ -1,12 +1,12 @@
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'; 
-import { useEffect } from 'react';
+
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Home from './pages/Home';
- import useAuth from './hooks/useAuth';
+ 
 
-import { SortableUser } from './components/SortableUser';
+
 
  
 
@@ -14,17 +14,17 @@ import { SortableUser } from './components/SortableUser';
 
 function App() {
 
-   const Navigate=useNavigate;
-    const {user}=useAuth()
+  //  const Navigate=useNavigate;
+  //   const {user}=useAuth()
 
-     useEffect(()=>{
-       if (user){
-         Navigate('/')
-     } else{
-        Navigate("/login")
-      }
+  //    useEffect(()=>{
+  //      if (user){
+  //        Navigate('/')
+  //    } else{
+  //       Navigate("/login")
+  //     }
     
-     },[user]);
+  //    },[user]);
 
 
   return (
