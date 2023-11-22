@@ -136,22 +136,24 @@ function Home() {
       <div className="nav">
         <h2 className="imgG mt-3">Image Gallery</h2>
 
-        <div className="mb-3 mt-3 col-4 mx-auto search">
+        <div className="search">
           <h5 className="searchText">Search</h5>
-          <div className="ss">
+          
+          
             <input
               type="text"
               className="search w-100"
               value={filter}
               onChange={SearchItem.bind(this)}
             />
-          </div>
-          <div className="login">
-            <Link to="/login">
-              <button>Log in</button>
-            </Link>
-          </div>
+          
         </div>
+        <div className="login">
+          <Link to="/login">
+            <button className="log">Log in</button>
+          </Link>
+        </div>
+        
       </div>
 
       <div className="cardWrapper">

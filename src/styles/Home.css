@@ -9,13 +9,14 @@
     height:8rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 0 auto;
     justify-content: center;
     background-color: grey;
 
 }
 .cardWrapper{
-    width: 100%;
+    width: 90%;
     max-width: 75rem;
     flex-direction: row;
     display: flex;
@@ -23,10 +24,14 @@
     object-fit: cover;
     justify-content: space-around;
     flex-wrap: wrap;
+    overflow: hidden;
     
 }
 .card{
     cursor: -webkit-grab;
+    
+    
+    overflow: hidden;
 }
 .imgG{
     
@@ -34,22 +39,45 @@
     color: white;
     object-fit: cover;
     
+    
+}
+.s{
+    display: flex;
 }
 .login{
-    width: 4rem;
+    
+    width: 5rem;
     height: 2rem;
     border: none;
+    margin: 0 auto;
+    margin-right: 1rem;
+    justify-content: end;
+    align-items: end;
+    text-align: end;
     border-radius: 3px;
-    margin-left: 3rem;
+    align-items: center;
+    
+    
+    }
+
+.log{
+    
+    margin: 0 auto;
+    border: none;
+    text-decoration: none;
+    border-radius: 5px;
+    
+    
+
 }
 .ss{
 
     display: flex;
-    
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     text-align: center;
-    margin: 0 auto;
+    
 }
 
 
@@ -59,9 +87,11 @@
     max-width: 30rem;
     height: 2rem;
     margin: 0 auto;
-    justify-content: center;
+    
     display: flex;
     align-items: center;
+    justify-content: center;
+    
     border-radius: 5px;
     border: none;
     font-weight: 500;
@@ -70,7 +100,9 @@
     
 }
 .card-img-top{
+    object-fit: cover;
     width: 20rem;
+
     height: 30vh;
 }
 
